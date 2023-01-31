@@ -9,6 +9,7 @@ public class VisionCheck : MonoBehaviour
 
     public List<Transform> SeenObjects = new List<Transform>();
 
+    //When an object comes into view, put it into a list so it can be checked with a raycast.
     private void OnTriggerEnter(Collider SeenObject)
     {
         if (FlashLightSource.enabled)
@@ -17,6 +18,7 @@ public class VisionCheck : MonoBehaviour
         }
     }
 
+    //Whenever an object leaves the light of the flashlight, make it disappear.
     private void OnTriggerExit(Collider ObjectCollider)
     {
         if (FlashLightSource.enabled)
@@ -26,8 +28,10 @@ public class VisionCheck : MonoBehaviour
         }
     }
 
+    //Check every object for view obstuctions.
     private void Update()
     {
+        //Check if flashlight is enabled, if not, delete every object that is still in the list.
         if (FlashLightSource.enabled)
         {
             foreach (Transform Object in SeenObjects)
@@ -40,7 +44,6 @@ public class VisionCheck : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Linecast(FlashLightSource.transform.position, Object.position, out hit))
                 {
-                    print(hit.transform.tag);
                     if (hit.transform.tag != "LooseObject")
                     {
                         SeenObjects.Remove(Object);
