@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - LooseObject
+  - Hideable
   layers:
   - Default
   - TransparentFX
